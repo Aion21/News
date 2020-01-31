@@ -1,0 +1,14 @@
+<html>
+<head>
+    <title> BBC </title>
+</head>
+<body>
+<a href="index"> <--Go back</a>
+<br>
+<h2>Fresh BBC news:</h2>
+{% for i in news%}
+<div><a href="{{i['link']}}"> {{i['title']}} </a></div>
+<div>=======================</div>
+{% endfor %}
+</body>
+</html>

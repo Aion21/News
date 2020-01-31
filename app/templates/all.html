@@ -1,0 +1,25 @@
+<html>
+<head>
+    <title> All news </title>
+</head>
+<body>
+<a href="index"> <--Go back</a>
+<h2>Fresh BBC news:</h2>
+{% for i in bbc%}
+<div><a href="{{i['link']}}"> {{i['title']}} </a></div>
+<div>=======================</div>
+{% endfor %}
+<br>
+<h2>Fresh Ria news:</h2>
+{% for i in ria%}
+<div><a href="{{i['link']}}"> {{i['title']}} </a></div>
+<div>=======================</div>
+{% endfor %}
+<br>
+<h2>Fresh Interfax news:</h2>
+{% for i in interfax%}
+<div><a href="{{i['link']}}"> {{i['title']}} </a></div>
+<div>=======================</div>
+{% endfor %}
+</body>
+</html>

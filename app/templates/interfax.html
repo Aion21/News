@@ -1,0 +1,14 @@
+<html>
+<head>
+    <title> Interfax </title>
+</head>
+<body>
+<a href="index"> <--Go back</a>
+<br>
+<h2>Fresh Interfax news:</h2>
+{% for i in news%}
+<div><a href="{{i['link']}}"> {{i['title']}} </a></div>
+<div>==========================================</div>
+{% endfor %}
+</body>
+</html>
