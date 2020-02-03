@@ -1,30 +1,20 @@
-import requests
-from bs4 import BeautifulSoup
-from user_agent import generate_user_agent
+from app.core.base_news import BaseNews
+from app.core.selectors import ria_selectors
 
 
-class Ria:
+class Ria(BaseNews):
 
-    @staticmethod
-    def get_news():
-        response = requests.get('https://ria.ru',
-                                headers={'User-Agent': generate_user_agent(device_type='desktop',
-                                                                           os=('mac', 'linux'))})
+    def parse(self):
+        return super().parse()
 
-        soup = BeautifulSoup(response.content, 'html.parser')
+    def get_url(self):
+        return 'https://ria.ru'
 
-        all_news = []
-        all_news.append(soup.select('span.cell-list__item-title'))
-        all_news.append(soup.select('span.cell-main-photo__title'))
+    def get_name(self):
+        return 'ria.ru'
 
-        news_list = []
+    def get_selectors(self):
+        return ria_selectors
 
-        for news in all_news:
-            for i in news:
-                if i.getText() != ' ':
-                    news = {'name': 'ria.ru',
-                            'title': i.getText(),
-                            'link': i.parent.parent['href']}
-                    news_list.append(news)
-
-        return news_list
+    def get_link(self, news):
+        return news.parent.parent['href']

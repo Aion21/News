@@ -1,29 +1,20 @@
-import requests
-from bs4 import BeautifulSoup
-from user_agent import generate_user_agent
+from app.core.base_news import BaseNews
+from app.core.selectors import interfax_selectors
 
 
-class Interfax:
+class Interfax(BaseNews):
 
-    @staticmethod
-    def get_news():
-        response = requests.get('https://www.interfax.ru/',
-                                headers={'User-Agent': generate_user_agent(device_type='desktop',
-                                                                                         os=('mac', 'linux'))})
-        soup = BeautifulSoup(response.content, 'html.parser')
+    def parse(self):
+        return super().parse()
 
-        all_news = []
-        all_news.append(soup.select("div[class='timeline__text'] a"))
-        all_news.append(soup.select("div[class='timeline__group'] a"))
-        all_news.append(soup.select("div[class='timeline__photo'] a"))
+    def get_url(self):
+        return 'https://www.interfax.ru'
 
-        news_list = []
-        for news in all_news:
-            for i in news:
-                if i.get_text() != '':
-                    news = {'name': 'interfax.ru',
-                            'title': i.getText(),
-                            'link': 'https://interfax.ru' + i['href']}
-                    news_list.append(news)
+    def get_name(self):
+        return 'interfax.ru'
 
-        return news_list
+    def get_selectors(self):
+        return interfax_selectors
+
+    def get_link(self, news):
+        return self.get_url() + news['href']

@@ -1,29 +1,23 @@
-import requests
-from bs4 import BeautifulSoup
-from user_agent import generate_user_agent
 import re
+from app.core.base_news import BaseNews
+from app.core.selectors import bbc_selectors
 
 
-class BBC:
+class BBC(BaseNews):
 
-    @staticmethod
-    def get_news():
-        response = requests.get('https://www.bbc.com/news',
-                                headers={'User-Agent': generate_user_agent(device_type='desktop',
-                                                                           os=('mac', 'linux'))})
+    def parse(self):
+        return super().parse()
 
-        soup = BeautifulSoup(response.content, 'html.parser')
-        news = soup.select("h3[class^='gs-c-promo-heading__title']")
+    def get_url(self):
+        return 'https://www.bbc.com/news'
 
-        news_list = []
+    def get_name(self):
+        return 'bbc.com'
 
-        for i in news:
-            news = {'name': 'bbc.com',
-                    'title': i.get_text(),
-                    'link': 'https://www.bbc.co.uk' + i.parent['href'] if i.parent['href'] != re.compile('^https')
-                    else i.parent['href']}
+    def get_selectors(self):
+        return bbc_selectors
 
-            if news not in news_list:
-                news_list.append(news)
-
-        return news_list
+    def get_link(self, news):
+        return 'https://www.bbc.com' + news.parent['href'] \
+            if news.parent['href'] != re.compile('^https') \
+            else news.parent['href']

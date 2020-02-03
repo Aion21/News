@@ -13,33 +13,34 @@ def index():
 
 @app.route('/ria')
 def ria():
-    ria = Ria().get_news()
+    ria_news = Ria().parse()
 
-    return render_template('ria.html', name='Ria', news=ria)
+    return render_template('news_page.html', title='Ria', news=[{'source_name': 'Ria', 'news': ria_news}])
 
 
 @app.route('/bbc')
 def bbc():
-    bbc = BBC().get_news()
+    bbc_news = BBC().parse()
 
-    return render_template('bbc.html', name='BBC', news=bbc)
+    return render_template('news_page.html', title='BBC', news=[{'source_name': 'BBC', 'news': bbc_news}])
 
 
 @app.route('/interfax')
 def interfax():
-    interfax = Interfax().get_news()
+    interfax_news = Interfax().parse()
 
-    return render_template('interfax.html', name='Interfax', news=interfax)
+    return render_template('news_page.html', title='Interfax',
+                           news=[{'source_name': 'Interfax', 'news': interfax_news}])
 
 
 @app.route('/all')
 def all():
-    interfax = Interfax().get_news()
-    bbc = BBC().get_news()
-    ria = Ria().get_news()
+    interfax_news = Interfax().parse()
+    bbc_news = BBC().parse()
+    ria_news = Ria().parse()
 
-    return render_template('all.html',
-                           name='All',
-                           interfax=interfax,
-                           bbc=bbc,
-                           ria=ria)
+    return render_template('news_page.html',
+                           title='All news',
+                           news=[{'source_name': 'Ria', 'news': ria_news},
+                                 {'source_name': 'BBC', 'news': bbc_news},
+                                 {'source_name': 'Interfax', 'news': interfax_news}])
