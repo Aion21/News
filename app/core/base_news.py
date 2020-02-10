@@ -23,15 +23,16 @@ class BaseNews(ABC):
             news = soup.select(sel)
 
             for i in news:
-                if i.get_text() != '':
-                    link = self.get_link(i)
+                if self.get_link(i):
+                    if i.get_text() != '':
+                        link = self.get_link(i)
 
-                    news = {'name': name,
-                            'title': i.get_text(),
-                            'link': link}
+                        news = {'name': name,
+                                'title': i.get_text(),
+                                'link': link}
 
-                    if news not in news_list:
-                        news_list.append(news)
+                        if news not in news_list:
+                            news_list.append(news)
 
         return news_list
 

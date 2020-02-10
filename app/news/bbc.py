@@ -18,6 +18,9 @@ class BBC(BaseNews):
         return bbc_selectors
 
     def get_link(self, news):
-        return 'https://www.bbc.com' + news.parent['href'] \
-            if news.parent['href'] != re.compile('^https') \
-            else news.parent['href']
+        if news.parent.get('href'):
+            return 'https://www.bbc.com' + news.parent['href'] \
+                if not re.match('^https', news.parent['href']) \
+                else news.parent['href']
+        else:
+            return None

@@ -1,16 +1,18 @@
-<html>
-<head>
-    <title>{{ title }}</title>
-</head>
-<body>
-<a href="index"><-- Go back</a>
-<br>
-{% for item in news %}
-    <h2> Fresh {{item.source_name }} news</h2>
-    {% for i in item.news %}
-    <div><a href="{{i['link']}}"> {{i['title']}}</a> </div>
-    <div>=======================================</div>
-    {% endfor %}
+{% extends "index.html" %}
+{% block actualNews %}
+{% if news %}
+
+    {% for item in news %}
+        <h2 class="source-header"> Fresh {{item.source_name }} news</h2>
+        <br>
+        <div class="content-item-container">
+        {% for i in item.news %}
+        <div>
+            <div class="content-item"><a class="content-link" href="{{i['link']}}"> {{i['title']}} </a> </div>
+        </div>
+        {% endfor %}
+        </div>
 {% endfor %}
-</body>
-</html>
+
+{% endif %}
+{% endblock %}

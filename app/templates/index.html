@@ -1,16 +1,106 @@
-<html>
-    <head>
-        <title> News </title>
-    </head>
-    <body>
-        <h3>Choose site to get news</h3>
-        <br><a href="all">All news</a>
-        <br><a>==========================================</a>
-        <br><a href="ria">Ria news</a>
-        <br><a>==========================================</a>
-        <br><a href="bbc">BBC news</a>
-        <br><a>==========================================</a>
-        <br><a href="interfax">Interfax news</a>
-        <br><a>==========================================</a>
-    </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body {
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+        }
+
+        a.header-link {
+            width: 25%;
+            margin: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: black;
+            color: white;
+            text-decoration: none;
+        }
+
+        a.header-link:hover {
+            background-color: white;
+            border: #5ac8fa solid 2px;
+            color: #5ac8fa;
+            cursor: pointer;
+        }
+
+        .header {
+            width: 100%;
+            height: 70px;
+            margin: 15px 0 0;
+            display: flex;
+            font-variant: all-small-caps;
+        }
+
+        .content {
+            margin: 15px 0 0;
+            display: flex;
+            flex-direction: column;
+            font-weight: normal;
+            justify-content: normal;
+            flex-wrap: wrap;
+            flex-flow: row wrap;
+        }
+
+        .content-item-container {
+            display: flex;
+            flex-flow: row wrap;
+        }
+
+
+        .content-link{
+            text-decoration: none;
+            color : black;
+            font-weight: lighter;
+        }
+
+
+        .content-item {
+            border-radius: 20px;
+            display: flex;
+            height: 11vh;
+            width: 50vw;
+            background-color: silver;
+            margin: 5px;
+            padding: 5px;
+            border: solid aliceblue;
+        }
+
+
+        .content-item:hover {
+            background-color: идгу ;
+            border: #4d738a solid 1px;
+            color: white;
+            cursor: pointer;
+        }
+
+
+        .content-item:hover > .content-link {
+            color: white;
+        }
+
+        .source-header {
+            background-color: black;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <a href="all" class="header-link">All news </a>
+    <a href="ria" class="header-link">Ria news </a>
+    <a href="bbc" class="header-link">Bbc news </a>
+    <a href="interfax" class="header-link">Interfax news </a>
+</div>
+<div class="content">
+{% block actualNews %}
+
+
+{% endblock %}
+</div>
+</body>
 </html>
